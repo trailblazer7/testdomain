@@ -365,6 +365,41 @@ function twentyseventeen_colors_css_wrap() {
 <?php }
 add_action( 'wp_head', 'twentyseventeen_colors_css_wrap' );
 
+function create_books_tax() {
+	register_taxonomy(
+		'genre',
+		'books',
+		array(
+			'label' => __( 'Genre' ),
+			'rewrite' => array( 'slug' => 'genre' ),
+			'hierarchical' => true,
+			'show_admin_column' => true
+		)
+	);
+}
+add_action( 'init', 'create_books_tax' );
+
+/**
+ * Register custom post type
+ */
+function post_type_registration() {
+	register_post_type( 'books',
+		array(
+			'labels' => array(
+				'name' => __( 'Books' ),
+				'singular_name' => __( 'Books' )
+			),
+			'public' => true,
+			'menu_position' => 5,
+			'has_archive' => true,
+			'rewrite' => array('slug' => 'books'),
+			'taxonomies' => array('Genre' => 'genre')
+		)
+	);
+}
+add_action( 'init', 'post_type_registration' );
+flush_rewrite_rules( false );
+
 /**
  * Enqueue scripts and styles.
  */
@@ -374,6 +409,9 @@ function twentyseventeen_scripts() {
 
 	// Theme stylesheet.
 	wp_enqueue_style( 'twentyseventeen-style', get_stylesheet_uri() );
+
+	// Theme stylesheet for RTL
+	wp_style_add_data( 'twentyseventeen-style', 'rtl', 'replace' );
 
 	// Load the dark colorscheme.
 	if ( 'dark' === get_theme_mod( 'colorscheme', 'light' ) || is_customize_preview() ) {
@@ -408,6 +446,7 @@ function twentyseventeen_scripts() {
 	}
 
 	wp_enqueue_script( 'twentyseventeen-global', get_theme_file_uri( '/assets/js/global.js' ), array( 'jquery' ), '1.0', true );
+	wp_enqueue_script( 'twentyseventeen-custom-functions', get_theme_file_uri( '/assets/js/custom-functions.js' ), array( 'jquery' ), '1.0', true );
 
 	wp_enqueue_script( 'jquery-scrollto', get_theme_file_uri( '/assets/js/jquery.scrollTo.js' ), array( 'jquery' ), '2.1.2', true );
 
@@ -416,6 +455,9 @@ function twentyseventeen_scripts() {
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
+
+	// Removes 'Categories' from product page
+	remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40 );
 }
 add_action( 'wp_enqueue_scripts', 'twentyseventeen_scripts' );
 

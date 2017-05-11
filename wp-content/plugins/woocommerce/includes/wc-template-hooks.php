@@ -140,7 +140,7 @@ add_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_rela
  * @see woocommerce_template_single_sharing()
  */
 add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_title', 5 );
-add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_rating', 10 );
+add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_rating', 40 );
 add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 10 );
 add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20 );
 add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40 );
@@ -170,11 +170,11 @@ add_action( 'woocommerce_review_comment_text', 'woocommerce_review_display_comme
  * @see woocommerce_single_variation()
  * @see woocommerce_single_variation_add_to_cart_button()
  */
-add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30 );
-add_action( 'woocommerce_simple_add_to_cart', 'woocommerce_simple_add_to_cart', 30 );
-add_action( 'woocommerce_grouped_add_to_cart', 'woocommerce_grouped_add_to_cart', 30 );
-add_action( 'woocommerce_variable_add_to_cart', 'woocommerce_variable_add_to_cart', 30 );
-add_action( 'woocommerce_external_add_to_cart', 'woocommerce_external_add_to_cart', 30 );
+add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 10 );
+add_action( 'woocommerce_simple_add_to_cart', 'woocommerce_simple_add_to_cart', 10 );
+add_action( 'woocommerce_grouped_add_to_cart', 'woocommerce_grouped_add_to_cart', 10 );
+add_action( 'woocommerce_variable_add_to_cart', 'woocommerce_variable_add_to_cart', 10 );
+add_action( 'woocommerce_external_add_to_cart', 'woocommerce_external_add_to_cart', 10 );
 add_action( 'woocommerce_single_variation', 'woocommerce_single_variation', 10 );
 add_action( 'woocommerce_single_variation', 'woocommerce_single_variation_add_to_cart_button', 20 );
 
